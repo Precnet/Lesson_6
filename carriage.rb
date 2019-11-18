@@ -1,6 +1,9 @@
+require_relative 'validator.rb'
+
 # Carriage
 class Carriage
   include Manufacturer
+  include Validator
 
   NUMBER_LENGTH = 5
   BASE_36 = 36
