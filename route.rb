@@ -2,10 +2,12 @@
 
 # Route
 require_relative 'instance_counter.rb'
+require_relative 'validator.rb'
 
 # Route
 class Route
   include InstanceCounter
+  include Validator
 
   attr_reader :stations, :number
 
