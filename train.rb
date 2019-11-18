@@ -31,13 +31,13 @@ class Train
     error_type = "Should be 'cargo' or 'passenger'. Got - '#{@type}'"
     raise ArgumentError, error_type unless TRAIN_TYPES.include? @type
 
-
+    error_number = "Train number is in wrong format - #{@number}"
+    raise ArgumentError, error_number unless @number =~ /^[0-9a-z]{3}-?[0-9a-z]{2}$/i
   end
 
   def valid?
 
   end
-
 
   def self.find_train_by_number(number)
     result = @@trains.select { |train| train.number == number }
