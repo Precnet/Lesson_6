@@ -137,4 +137,28 @@ describe Train do
       expect(Train.number_of_instances).to eq(10)
     end
   end
+  context 'checking validness of object' do
+    before(:each) do
+      @train = Train.new('cargo', 5, '123-df')
+    end
+    it 'should raise error with wrong train number' do
+      expect(@train.valid?).to eq(true)
+      @train.instance_variable_set(:@number, 123456)
+      expect(@train.valid?).to eq(false)
+    end
+    it 'should raise error with wrong train type' do
+      expect(@train.valid?).to eq(true)
+      @train.instance_variable_set(:@type, 'space')
+      expect(@train.valid?).to eq(false)
+    end
+    it 'should raise error with wrong train number' do
+      expect(@train.valid?).to eq(true)
+      @train.instance_variable_set(:@number_of_carriages, -200)
+      expect(@train.valid?).to eq(false)
+      @train.instance_variable_set(:@number_of_carriages, '5')
+      expect(@train.valid?).to eq(false)
+      @train.instance_variable_set(:@number_of_carriages, [10])
+      expect(@train.valid?).to eq(false)
+    end
+  end
 end
