@@ -3,13 +3,8 @@ require_relative 'train.rb'
 class CargoTrain < Train
   attr_reader :carriages
 
-  def initialize(train_number=nil)
-    if train_number
-      super(train_type='cargo', number_of_carriages=0, train_number=train_number)
-    else
-      super(train_type='cargo', number_of_carriages=0)
-    end
-
+  def initialize(train_number)
+    super(train_type='cargo', number_of_carriages=0, train_number=train_number)
     @carriages = []
   end
 
