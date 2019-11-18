@@ -3,7 +3,7 @@ require_relative '../cargo_train.rb'
 
 describe 'CargoTrain' do
   it 'should create train subclass of type cargo' do
-    train = CargoTrain.new
+    train = CargoTrain.new('12345')
     expect(train.type).to eq('cargo')
     expect(train.type).not_to eq('passenger')
     expect(train.type).not_to eq('12345')
@@ -13,7 +13,7 @@ describe 'CargoTrain' do
 
   context 'Carriage manipulations' do
     before(:all) do
-      @train = CargoTrain.new
+      @train = CargoTrain.new('12345')
     end
     it 'should add new carriages' do
       carriage = double('CargoCarriage', type: 'cargo')
