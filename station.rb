@@ -15,7 +15,8 @@ class Station
   end
 
   def initialize(station_name)
-    @name = check_station_name(station_name)
+    @name = station_name
+    validate!
     @trains_at_station = []
     register_instance
     @@stations.push(self)
@@ -46,17 +47,15 @@ class Station
 
   private
 
-  def check_station_name(name)
+  def validate!
     nil_message = 'Station name can`t be nil!'
     type_message = 'Station name should be of String class!'
     empty_message = 'Station name can`t be empty!'
     long_message = 'Station name is too long! Should be <= 20 symbols.'
-    raise ArgumentError, nil_message unless name
-    raise ArgumentError, type_message unless name.is_a?(String)
-    raise ArgumentError, empty_message unless name.length.positive?
-    raise ArgumentError, long_message unless name.length <= 20
-
-    name
+    raise ArgumentError, nil_message unless @name
+    raise ArgumentError, type_message unless @name.is_a?(String)
+    raise ArgumentError, empty_message unless @name.length.positive?
+    raise ArgumentError, long_message unless @name.length <= 20
   end
 
   def train_at_station?(train_number)
