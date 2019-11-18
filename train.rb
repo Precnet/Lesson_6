@@ -25,7 +25,12 @@ class Train
   end
 
   def valid?
-
+    begin
+      validate!
+    rescue
+      false
+    end
+    true
   end
 
   def self.find_train_by_number(number)
