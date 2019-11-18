@@ -116,7 +116,6 @@ describe 'UserInterface' do
       route_name = @ui.user_data.trains['test1'].route.number
       @ui.select_menu_item(:add_station_to_route, [route_name, 'middle_1'])
       message_backward = "Train had arrived at previous station! Current station is middle_1\n"
-      puts @ui.user_data.trains
       expect { @ui.select_menu_item(:move_train_backward, 'test1') }.to output(message_backward).to_stdout
     end
   end
