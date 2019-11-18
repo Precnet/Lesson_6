@@ -12,7 +12,7 @@ class Train
               :number_of_carriages, :route
   @@trains = []
 
-  def initialize(type, number_of_carriages, number = generate_train_number(10))
+  def initialize(type, number_of_carriages, number = generate_train_number)
     @number = number
     @number_of_carriages = number_of_carriages
     @type = type
@@ -114,8 +114,8 @@ class Train
   private
 
   # should be private because there is no need to call it in descendants
-  def generate_train_number(number_length)
-    rand(36**number_length).to_s(36)
+  def generate_train_number
+    rand(36**5).to_s(36)
   end
 
   # should be private because there is no need to call it in descendants
