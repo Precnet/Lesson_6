@@ -14,14 +14,30 @@ class Train
 
   def initialize(type, number_of_carriages, number = generate_train_number(10))
     @number = number
-    @number_of_carriages = check_number_of_carriages(number_of_carriages)
-    @type = check_train_type(type)
+    @number_of_carriages = number_of_carriages
+    @type = type
+    validate!
     @current_speed = 0
     @current_station = nil
     @route = nil
     @@trains.push(self)
     register_instance
   end
+
+  def validate!
+    # should be private because descendants are created without any carriages
+    message = "Number of carriages should be positive Integer. Got: #{@number_of_carriages}"
+    raise ArgumentError, message unless @number_of_carriages.is_a?(Integer) && @number_of_carriages >= 0
+
+    # should be private because descendants are created without train type selection
+    wrong_message = "Should be 'cargo' or 'passenger'. Got - '#{@type}'"
+    raise ArgumentError, wrong_message unless TRAIN_TYPES.include? @type
+  end
+
+  def valid?
+
+  end
+
 
   def self.find_train_by_number(number)
     result = @@trains.select { |train| train.number == number }
@@ -100,22 +116,6 @@ class Train
   # should be private because there is no need to call it in descendants
   def generate_train_number(number_length)
     rand(36**number_length).to_s(36)
-  end
-
-  # should be private because descendants are created without any carriages
-  def check_number_of_carriages(number)
-    message = "Number of carriages should be positive Integer. Got: #{number}"
-    raise ArgumentError, message unless number.is_a?(Integer) && number >= 0
-
-    number
-  end
-
-  # should be private because descendants are created without train type selection
-  def check_train_type(train_type)
-    wrong_message = "Should be 'cargo' or 'passenger'. Got - '#{train_type}'"
-    raise ArgumentError, wrong_message unless TRAIN_TYPES.include? train_type
-
-    train_type
   end
 
   # should be private because there is no need to call it in descendants
