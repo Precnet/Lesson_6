@@ -102,4 +102,29 @@ describe 'Station' do
       expect(Station.number_of_instances).to eq(12)
     end
   end
+  context 'checking validness of object' do
+    before(:each) do
+      @station = Station.new('Exception')
+    end
+    it 'should raise error with nil station name' do
+      expect(@station.valid?).to eq(true)
+      @station.instance_variable_set(:@name, nil)
+      expect(@station.valid?).to eq(false)
+    end
+    it 'should raise error with zero length station name' do
+      expect(@station.valid?).to eq(true)
+      @station.instance_variable_set(:@name, '')
+      expect(@station.valid?).to eq(false)
+    end
+    it 'should raise error with non-string station name' do
+      expect(@station.valid?).to eq(true)
+      @station.instance_variable_set(:@name, 12345)
+      expect(@station.valid?).to eq(false)
+    end
+    it 'should raise error with too long station name' do
+      expect(@station.valid?).to eq(true)
+      @station.instance_variable_set(:@name, 'azsldkhfaklshfkashfakshfkashdfka')
+      expect(@station.valid?).to eq(false)
+    end
+  end
 end
