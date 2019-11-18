@@ -2,10 +2,12 @@
 
 # station class
 require_relative 'instance_counter.rb'
+require_relative 'validator.rb'
 
 # station class
 class Station
   include InstanceCounter
+  include Validator
 
   attr_reader :name, :trains_at_station
   @@stations = []
