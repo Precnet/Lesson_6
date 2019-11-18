@@ -1,5 +1,6 @@
 require_relative 'manufacturer.rb'
 require_relative 'instance_counter.rb'
+require_relative 'validator.rb'
 
 TRAIN_TYPES = %w[passenger cargo].freeze
 
@@ -7,6 +8,7 @@ TRAIN_TYPES = %w[passenger cargo].freeze
 class Train
   include Manufacturer
   include InstanceCounter
+  include Validator
 
   attr_reader :number, :type, :current_speed, :current_station,
               :number_of_carriages, :route
@@ -22,16 +24,6 @@ class Train
     @route = nil
     @@trains.push(self)
     register_instance
-  end
-
-  def valid?
-    begin
-      validate!
-    rescue ArgumentError
-      false
-    else
-      true
-    end
   end
 
   def self.find_train_by_number(number)
