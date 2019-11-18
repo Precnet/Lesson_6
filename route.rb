@@ -14,6 +14,7 @@ class Route
   def initialize(first_station, last_station, number = generate_route_number(5))
     @stations = [first_station, last_station]
     @number = number
+    validate!
     register_instance
   end
 
@@ -32,6 +33,14 @@ class Route
   end
 
   private
+
+  def validate!
+    # empty method, added according to task requirement.
+    # has no actual code because of:
+    # 1) there are no requirements to route number
+    # 2) to avoid duplication with storing actual station objects route saves only station`s names,
+    # while actual stations are stored in instances of UserData class (main.rb)
+  end
 
   def generate_route_number(number_length)
     rand(36**number_length).to_s(36)
