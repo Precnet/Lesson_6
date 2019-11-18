@@ -25,13 +25,13 @@ class Train
   end
 
   def validate!
-    # should be private because descendants are created without any carriages
-    message = "Number of carriages should be positive Integer. Got: #{@number_of_carriages}"
-    raise ArgumentError, message unless @number_of_carriages.is_a?(Integer) && @number_of_carriages >= 0
+    error_carriages = "Number of carriages should be positive Integer. Got: #{@number_of_carriages}"
+    raise ArgumentError, error_carriages unless @number_of_carriages.is_a?(Integer) && @number_of_carriages >= 0
 
-    # should be private because descendants are created without train type selection
-    wrong_message = "Should be 'cargo' or 'passenger'. Got - '#{@type}'"
-    raise ArgumentError, wrong_message unless TRAIN_TYPES.include? @type
+    error_type = "Should be 'cargo' or 'passenger'. Got - '#{@type}'"
+    raise ArgumentError, error_type unless TRAIN_TYPES.include? @type
+
+
   end
 
   def valid?
