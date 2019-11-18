@@ -33,13 +33,13 @@ describe 'UserInterface' do
     end
     it 'should create new trains' do
       expect { @ui.select_menu_item(:show_existing_trains) }.to output("There are no trains.\n").to_stdout
-      message_1 = "New passenger train created. Its number is: test\n"
-      expect { @ui.select_menu_item(:create_passenger_train, 'test') }.to output(message_1).to_stdout
-      message_2 = "New cargo train created. Its number is: 1234\n"
-      expect { @ui.select_menu_item(:create_cargo_train, '1234') }.to output(message_2).to_stdout
-      @ui.select_menu_item(:create_cargo_train, '4321')
+      message_1 = "New passenger train created. Its number is: test1\n"
+      expect { @ui.select_menu_item(:create_passenger_train, 'test1') }.to output(message_1).to_stdout
+      message_2 = "New cargo train created. Its number is: 123-45\n"
+      expect { @ui.select_menu_item(:create_cargo_train, '123-45') }.to output(message_2).to_stdout
+      @ui.select_menu_item(:create_cargo_train, '54321')
       @ui.select_menu_item(:show_existing_trains)
-      message_3 = "There are next passenger trains: test()\nThere are next cargo trains: 1234(),4321()\n"
+      message_3 = "There are next passenger trains: test1()\nThere are next cargo trains: 123-45(),54321()\n"
       expect { @ui.select_menu_item(:show_existing_trains) }.to output(message_3).to_stdout
     end
   end
