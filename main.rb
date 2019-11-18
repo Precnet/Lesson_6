@@ -51,8 +51,13 @@ class UserInterface
     user_input = user_input.to_i
     error_message = 'There is no such menu item!'
     raise ArgumentError, error_message unless (1..@menu_items.length).include? user_input
-    parameters = get_request_parameters @user_action.method(@menu_items[user_input - 1]).parameters
-    select_menu_item(@menu_items[user_input - 1], parameters)
+    begin
+      parameters = get_request_parameters @user_action.method(@menu_items[user_input - 1]).parameters
+      select_menu_item(@menu_items[user_input - 1], parameters)
+    rescue
+      puts $!.message
+      retry
+    end
   end
 
   def get_request_parameters(parameters)
