@@ -21,7 +21,7 @@ class Carriage
   def validate!
     type_message = "Wrong carriage name! Should be string, got #{@number.class}"
     raise ArgumentError, type_message unless @number.is_a?(String)
-    length_message = "Route number should be between 3 and 20 symbols! Got - #{@number.length}"
+    length_message = "Carriage number should be between 3 and 20 symbols! Got - #{@number.length}"
     raise ArgumentError, length_message unless 3 < @number.length && @number.length < 20
   end
 
