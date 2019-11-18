@@ -82,7 +82,7 @@ describe 'UserInterface' do
     end
     it 'should add route to train' do
       # @ui.create_menu_item(:create_passenger_train, -> (number=nil) { @ua.create_passenger_train number})
-      @ui.select_menu_item(:create_passenger_train, 'passenger_train')
+      @ui.select_menu_item(:create_passenger_train, 'train')
       route_name = @ui.user_data.routes.keys.first
       train_name = @ui.user_data.trains.keys.first
       expect { @ui.select_menu_item(:add_route_to_train, [route_name, 'some_train']) }.to raise_error(ArgumentError)
@@ -92,42 +92,42 @@ describe 'UserInterface' do
   end
   context 'carriage management' do
     it 'should add carriage to train' do
-      message_passenger = "Passenger carriage was added to train 'test'\n"
-      expect(@ui.user_data.trains['test'].number_of_carriages).to eq(0)
-      expect { @ui.select_menu_item(:add_carriage_to_train, 'test')}.to output(message_passenger).to_stdout
-      expect(@ui.user_data.trains['test'].number_of_carriages).to eq(1)
-      expect { @ui.select_menu_item(:add_carriage_to_train, 'test')}.to output(message_passenger).to_stdout
-      message_cargo = "Cargo carriage was added to train '1234'\n"
-      expect { @ui.select_menu_item(:add_carriage_to_train, '1234')}.to output(message_cargo).to_stdout
+      message_passenger = "Passenger carriage was added to train 'test1'\n"
+      expect(@ui.user_data.trains['test1'].number_of_carriages).to eq(0)
+      expect { @ui.select_menu_item(:add_carriage_to_train, 'test1')}.to output(message_passenger).to_stdout
+      expect(@ui.user_data.trains['test1'].number_of_carriages).to eq(1)
+      expect { @ui.select_menu_item(:add_carriage_to_train, 'test1')}.to output(message_passenger).to_stdout
+      message_cargo = "Cargo carriage was added to train '123-45'\n"
+      expect { @ui.select_menu_item(:add_carriage_to_train, '123-45')}.to output(message_cargo).to_stdout
     end
     it 'should remove carriage from train' do
       expect { @ui.select_menu_item(:remove_carriage_from_train, ['test', 'smth']) }.to raise_error(ArgumentError)
-      carriage_number = @ui.user_data.trains['test'].carriages[0].number
-      message = "Carriage '#{carriage_number}' was removed from train 'test'\n"
-      expect(@ui.user_data.trains['test'].number_of_carriages).to eq(2)
-      expect { @ui.select_menu_item(:remove_carriage_from_train, ['test', carriage_number]) }.to output(message).to_stdout
-      expect(@ui.user_data.trains['test'].number_of_carriages).to eq(1)
+      carriage_number = @ui.user_data.trains['test1'].carriages[0].number
+      message = "Carriage '#{carriage_number}' was removed from train 'test1'\n"
+      expect(@ui.user_data.trains['test1'].number_of_carriages).to eq(2)
+      expect { @ui.select_menu_item(:remove_carriage_from_train, ['test1', carriage_number]) }.to output(message).to_stdout
+      expect(@ui.user_data.trains['test1'].number_of_carriages).to eq(1)
     end
   end
   context 'train movement' do
     it 'should move train forward and backward' do
       message_forward = "Train had arrived at next station! Current station is last\n"
-      expect { @ui.select_menu_item(:move_train_forward, 'test') }.to output(message_forward).to_stdout
-      route_name = @ui.user_data.trains['test'].route.number
+      expect { @ui.select_menu_item(:move_train_forward, 'test1') }.to output(message_forward).to_stdout
+      route_name = @ui.user_data.trains['test1'].route.number
       @ui.select_menu_item(:add_station_to_route, [route_name, 'middle_1'])
       message_backward = "Train had arrived at previous station! Current station is middle_1\n"
       puts @ui.user_data.trains
-      expect { @ui.select_menu_item(:move_train_backward, 'test') }.to output(message_backward).to_stdout
+      expect { @ui.select_menu_item(:move_train_backward, 'test1') }.to output(message_backward).to_stdout
     end
   end
   context 'displaying trains at station' do
     it 'should correctly display trains at station' do
-      message_1 = "There are next trains at station 'middle_1':\nPassenger trains: [\"test\"]\nCargo trains: []\n"
+      message_1 = "There are next trains at station 'middle_1':\nPassenger trains: [\"test1\"]\nCargo trains: []\n"
       expect { @ui.select_menu_item(:show_trains_at_station, 'middle_1') }.to output(message_1).to_stdout
-      @ui.select_menu_item(:move_train_forward, 'test')
+      @ui.select_menu_item(:move_train_forward, 'test1')
       message_2 = "There are next trains at station 'middle_1':\nPassenger trains: []\nCargo trains: []\n"
       expect { @ui.select_menu_item(:show_trains_at_station, 'middle_1') }.to output(message_2).to_stdout
-      @ui.select_menu_item(:move_train_backward, 'test')
+      @ui.select_menu_item(:move_train_backward, 'test1')
       expect { @ui.select_menu_item(:show_trains_at_station, 'middle_1') }.to output(message_1).to_stdout
     end
   end

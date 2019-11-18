@@ -5,8 +5,8 @@ require_relative '../train.rb'
 describe Train do
   context '#initialize' do
     it 'should create object with custom train number' do
-      train = Train.new('cargo', 10, 'some_name')
-      expect(train.number).to eq('some_name')
+      train = Train.new('cargo', 10, 'tname')
+      expect(train.number).to eq('tname')
     end
     it 'should create random name if no one was provided' do
       train_1 = Train.new('cargo', 10)
