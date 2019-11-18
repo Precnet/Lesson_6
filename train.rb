@@ -27,10 +27,11 @@ class Train
   def valid?
     begin
       validate!
-    rescue
+    rescue ArgumentError
       false
+    else
+      true
     end
-    true
   end
 
   def self.find_train_by_number(number)
