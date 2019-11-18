@@ -35,11 +35,12 @@ class Route
   private
 
   def validate!
-    # empty method, added according to task requirement.
-    # has no actual code because of:
-    # 1) there are no requirements to route number
-    # 2) to avoid duplication with storing actual station objects route saves only station`s names,
+    # to avoid duplication with storing actual station objects route saves only station`s names,
     # while actual stations are stored in instances of UserData class (main.rb)
+    type_message = "Wrong route name! Should be string, got #{@number.class}"
+    raise ArgumentError, type_message unless @number.is_a?(String)
+    length_message = "Route number should be between 3 and 20 symbols! Got - #{@number.length}"
+    raise ArgumentError, length_message unless 3 < @number.length && @number.length < 20
   end
 
   def generate_route_number(number_length)
