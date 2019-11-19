@@ -7,11 +7,11 @@ describe 'Station' do
     expect(station.name).to eq('first_station_ever')
   end
   it 'shouldn`t create station with incorrect name' do
-    expect { Station.new(nil) }.to raise_error(ArgumentError)
-    expect { Station.new(342) }.to raise_error(ArgumentError)
-    expect { Station.new(['good_station_name']) }.to raise_error(ArgumentError)
-    expect { Station.new('') }.to raise_error(ArgumentError)
-    expect { Station.new('very-very-very long station name') }.to raise_error(ArgumentError)
+    expect { Station.new(nil) }.to raise_error(RailwayError)
+    expect { Station.new(342) }.to raise_error(RailwayError)
+    expect { Station.new(['good_station_name']) }.to raise_error(RailwayError)
+    expect { Station.new('') }.to raise_error(RailwayError)
+    expect { Station.new('very-very-very long station name') }.to raise_error(RailwayError)
   end
   context 'trains manipulations' do
     before(:all) do
