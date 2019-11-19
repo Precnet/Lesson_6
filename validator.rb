@@ -1,11 +1,8 @@
 module Validator
   def valid?
-    begin
-      validate!
+    validate!
+    true
     rescue ArgumentError
       false
-    else
-      true
-    end
   end
 end
