@@ -3,6 +3,7 @@
 # Route
 require_relative 'instance_counter.rb'
 require_relative 'validator.rb'
+require_relative 'railway_error.rb'
 
 # Route
 class Route
@@ -38,9 +39,9 @@ class Route
     # to avoid duplication with storing actual station objects route saves only station`s names,
     # while actual stations are stored in instances of UserData class (main.rb)
     type_message = "Wrong route name! Should be string, got #{@number.class}"
-    raise ArgumentError, type_message unless @number.is_a?(String)
+    raise RailwayError, type_message unless @number.is_a?(String)
     length_message = "Route number should be between 3 and 20 symbols! Got - #{@number.length}"
-    raise ArgumentError, length_message unless 3 < @number.length && @number.length < 20
+    raise RailwayError, length_message unless 3 < @number.length && @number.length < 20
   end
 
   def generate_route_number(number_length)
