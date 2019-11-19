@@ -51,13 +51,29 @@ class Station
   private
 
   def validate!
+    validate_station_name_not_nil!
+    validate_station_name_type!
+    validate_station_name_non_empty!
+    validate_station_name_length!
+  end
+
+  def validate_station_name_not_nil!
     nil_message = 'Station name can`t be nil!'
-    type_message = 'Station name should be of String class!'
-    empty_message = 'Station name can`t be empty!'
-    long_message = 'Station name is too long! Should be <= 20 symbols.'
     raise RailwayError, nil_message unless @name
+  end
+
+  def validate_station_name_type!
+    type_message = 'Station name should be of String class!'
     raise RailwayError, type_message unless @name.is_a?(String)
+  end
+
+  def validate_station_name_non_empty!
+    empty_message = 'Station name can`t be empty!'
     raise RailwayError, empty_message unless @name.length.positive?
+  end
+
+  def validate_station_name_length!
+    long_message = 'Station name is too long! Should be <= 20 symbols.'
     raise RailwayError, long_message unless @name.length <= 20
   end
 
