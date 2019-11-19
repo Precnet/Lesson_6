@@ -1,4 +1,5 @@
 require_relative 'validator.rb'
+require_relative 'railway_error.rb'
 
 # Carriage
 class Carriage
@@ -20,9 +21,9 @@ class Carriage
 
   def validate!
     type_message = "Wrong carriage name! Should be string, got #{@number.class}"
-    raise ArgumentError, type_message unless @number.is_a?(String)
+    raise RailwayError, type_message unless @number.is_a?(String)
     length_message = "Carriage number should be between 3 and 20 symbols! Got - #{@number.length}"
-    raise ArgumentError, length_message unless 3 < @number.length && @number.length < 20
+    raise RailwayError, length_message unless 3 < @number.length && @number.length < 20
   end
 
   # this is a method for creating default name for carriage it should not
