@@ -107,12 +107,22 @@ class Train
   # end
 
   def validate!
+    validate_number_of_carriages!
+    validate_train_number!
+    validate_train_number_format!
+  end
+
+  def validate_number_of_carriages!
     error_carriages = "Number of carriages should be positive Integer. Got: #{@number_of_carriages}"
     raise RailwayError, error_carriages unless @number_of_carriages.is_a?(Integer) && @number_of_carriages >= 0
+  end
 
+  def validate_train_number!
     error_type = "Should be 'cargo' or 'passenger'. Got - '#{@type}'"
     raise RailwayError, error_type unless TRAIN_TYPES.include? @type
+  end
 
+  def validate_train_number_format!
     error_number = "Train number is in wrong format - #{@number}"
     raise RailwayError, error_number unless @number =~ /^[0-9a-z]{3}-?[0-9a-z]{2}$/i
   end
