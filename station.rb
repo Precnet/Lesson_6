@@ -3,6 +3,7 @@
 # station class
 require_relative 'instance_counter.rb'
 require_relative 'validator.rb'
+require_relative 'railway_error.rb'
 
 # station class
 class Station
@@ -54,10 +55,10 @@ class Station
     type_message = 'Station name should be of String class!'
     empty_message = 'Station name can`t be empty!'
     long_message = 'Station name is too long! Should be <= 20 symbols.'
-    raise ArgumentError, nil_message unless @name
-    raise ArgumentError, type_message unless @name.is_a?(String)
-    raise ArgumentError, empty_message unless @name.length.positive?
-    raise ArgumentError, long_message unless @name.length <= 20
+    raise RailwayError, nil_message unless @name
+    raise RailwayError, type_message unless @name.is_a?(String)
+    raise RailwayError, empty_message unless @name.length.positive?
+    raise RailwayError, long_message unless @name.length <= 20
   end
 
   def train_at_station?(train_number)
