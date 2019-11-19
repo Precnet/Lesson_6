@@ -1,6 +1,7 @@
 require_relative 'manufacturer.rb'
 require_relative 'instance_counter.rb'
 require_relative 'validator.rb'
+require_relative 'railway_error.rb'
 
 TRAIN_TYPES = %w[passenger cargo].freeze
 
@@ -107,13 +108,13 @@ class Train
 
   def validate!
     error_carriages = "Number of carriages should be positive Integer. Got: #{@number_of_carriages}"
-    raise ArgumentError, error_carriages unless @number_of_carriages.is_a?(Integer) && @number_of_carriages >= 0
+    raise RailwayError, error_carriages unless @number_of_carriages.is_a?(Integer) && @number_of_carriages >= 0
 
     error_type = "Should be 'cargo' or 'passenger'. Got - '#{@type}'"
-    raise ArgumentError, error_type unless TRAIN_TYPES.include? @type
+    raise RailwayError, error_type unless TRAIN_TYPES.include? @type
 
     error_number = "Train number is in wrong format - #{@number}"
-    raise ArgumentError, error_number unless @number =~ /^[0-9a-z]{3}-?[0-9a-z]{2}$/i
+    raise RailwayError, error_number unless @number =~ /^[0-9a-z]{3}-?[0-9a-z]{2}$/i
   end
 
   # should be private because there is no need to call it in descendants
